@@ -57,9 +57,17 @@ export class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
+    const isVercelRuntime = Boolean(process.env.VERCEL);
+
     routes.forEach((route) => {
       route.initRoutes();
       this.app.route("/api", route.controller);
+
+      // Vercel functions mounted under /api/[...path] can forward stripped paths
+      // (e.g. /admin/auth/csrf), so expose the same controllers at root in runtime.
+      if (isVercelRuntime) {
+        this.app.route("/", route.controller);
+      }
     });
 
     this.app.route("/", Home);
