@@ -1,7 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --include=dev",
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ],
   "functions": {
     "api/[...path].ts": {
       "maxDuration": 30

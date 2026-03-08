@@ -40,10 +40,23 @@ export const getBestAudioStreamUrl = async (trackId, fallbackLinks = [], audioQu
   try {
     const payload = await request(`/songs/${encodeURIComponent(trackId)}`, {}, { timeoutMs: 3500 });
     const song = Array.isArray(payload?.data) ? payload.data[0] : null;
-    const apiUrl = selectBestAudioUrl(song?.downloadUrl, audioQuality);
+    let apiUrl = selectBestAudioUrl(song?.downloadUrl, audioQuality);
+
+    // Fallback to query route for environments where path-param matching can fail.
+    if (!apiUrl) {
+      const byIdsPayload = await request('/songs', { ids: trackId }, { timeoutMs: 3500 });
+      const byIdsSong = Array.isArray(byIdsPayload?.data) ? byIdsPayload.data[0] : null;
+      apiUrl = selectBestAudioUrl(byIdsSong?.downloadUrl, audioQuality);
+    }
 
     return apiUrl || null;
   } catch {
-    return null;
+    try {
+      const byIdsPayload = await request('/songs', { ids: trackId }, { timeoutMs: 3500 });
+      const byIdsSong = Array.isArray(byIdsPayload?.data) ? byIdsPayload.data[0] : null;
+      return selectBestAudioUrl(byIdsSong?.downloadUrl, audioQuality);
+    } catch {
+      return null;
+    }
   }
 };
