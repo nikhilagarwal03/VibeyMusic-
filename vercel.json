@@ -5,14 +5,14 @@
   "outputDirectory": "dist",
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "^/api(?:/(.*))?$",
       "dest": "/api/$1"
     },
     {
       "handle": "filesystem"
     },
     {
-      "src": "/(.*)",
+      "src": "^/(?!api(?:/|$))(?!.*\\.[^/]+$).*$",
       "dest": "/index.html"
     }
   ],
