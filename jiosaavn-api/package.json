@@ -1,0 +1,60 @@
+{
+  "name": "jiosaavn-api",
+  "version": "0.1.0",
+  "description": "Unofficial JioSaavn API",
+  "type": "module",
+  "main": "dist/server.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.js"
+  },
+  "sideEffects": false,
+  "imports": {
+    "#modules/*": {
+      "types": "./src/modules/*/index.d.ts",
+      "production": "./dist/modules/*/index.js",
+      "default": "./src/modules/*/"
+    },
+    "#common/*": {
+      "types": "./src/common/*/index.d.ts",
+      "production": "./dist/common/*/index.js",
+      "default": "./src/common/*/"
+    }
+  },
+  "scripts": {
+    "dev": "bun run --hot src/server.ts",
+    "start": "bun dist/server.js",
+    "prebuild": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "tsc && tsc-alias",
+    "lint": "eslint .",
+    "lint:fix": "bun run lint --fix",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.0",
+    "@hono/zod-openapi": "^0.19.2",
+    "@hono/zod-validator": "^0.4.3",
+    "@scalar/hono-api-reference": "^0.7.4",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.3.1",
+    "hono": "^4.7.5",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.1.0",
+    "node-forge": "^1.3.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@kolhe/eslint-config": "2.2.6",
+    "@types/bun": "^1.2.8",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.13.14",
+    "@types/node-forge": "^1.3.11",
+    "eslint": "^9.23.0",
+    "prettier": "^3.8.1",
+    "tsc-alias": "^1.8.13",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9"
+  }
+}
