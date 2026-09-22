@@ -1,13 +1,14 @@
 import React from 'react';
+import { Activity, Dumbbell, Flame, Guitar, Moon, PartyPopper } from 'lucide-react';
 import { Button, CollectionCard, SectionHeader, TrackCard } from '../../../shared/ui';
 
 const vibeButtons = [
-  { label: '🎸 Chill', search: 'Bollywood chill songs' },
-  { label: '🔥 Trending', search: 'Indian trending now' },
-  { label: '💔 Sad Bops', search: 'Indian sad songs' },
-  { label: '🎉 Party', search: 'indian party music' },
-  { label: '😴 Sleep', search: 'sleep music' },
-  { label: '💪 Workout', search: 'workout' }
+  { label: 'Chill', detail: 'Slow burn', search: 'Bollywood chill songs', icon: Guitar },
+  { label: 'Trending', detail: 'Right now', search: 'Indian trending now', icon: Flame },
+  { label: 'Sad Bops', detail: 'Feel it all', search: 'Indian sad songs', icon: Activity },
+  { label: 'Party', detail: 'Turn it up', search: 'indian party music', icon: PartyPopper },
+  { label: 'Sleep', detail: 'Soft landing', search: 'sleep music', icon: Moon },
+  { label: 'Workout', detail: 'Keep moving', search: 'workout', icon: Dumbbell }
 ];
 
 const HomeSection = ({ home, onSelectTrack }) => {
@@ -31,13 +32,17 @@ const HomeSection = ({ home, onSelectTrack }) => {
   const canClearRecentlyPlayed = !isRecentlyLikedMode && recentItems.length > 0;
 
   return (
-  <div className="space-y-10">
-    <div>
-      <h2 className="type-display mb-7">Welcome Back</h2>
+  <div className="space-y-12">
+    <div className="relative overflow-hidden rounded-2xl border border-blue-300/15 bg-gradient-to-br from-blue-500/15 via-slate-900/20 to-transparent px-6 py-7 md:px-9 md:py-10">
+      <div className="absolute -right-10 -top-16 h-48 w-48 rounded-full border border-blue-300/10" />
+      <div className="absolute -right-2 -top-8 h-32 w-32 rounded-full border border-blue-300/10" />
+      <p className="type-caption text-blue-200/80 mb-3">Your listening room</p>
+      <h2 className="type-display max-w-xl mb-3">Find the sound that fits the moment.</h2>
+      <p className="type-body max-w-lg text-slate-300">Jump back into your rotation or tune the room to a new frequency.</p>
 
-      <div>
-        <p className="type-caption text-gray-400 mb-4">Quick Search</p>
-        <div className="flex flex-wrap gap-3">
+      <div className="mt-7">
+        <p className="type-caption text-gray-400 mb-3">Quick Search</p>
+        <div className="flex flex-wrap gap-2">
           {visibleQuickSuggestions.map((suggestion) => (
             <Button
               key={suggestion}
@@ -51,21 +56,33 @@ const HomeSection = ({ home, onSelectTrack }) => {
         </div>
       </div>
 
-      <div className="mt-10">
-        <p className="type-caption text-gray-400 mb-4">Explore Vibes</p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {vibeButtons.map((vibe) => (
-            <Button
+    </div>
+
+    <div>
+      <div className="mb-5 flex items-end justify-between gap-4">
+        <div>
+          <p className="type-caption text-blue-200/70 mb-2">Curated by mood</p>
+          <h3 className="type-title">Explore Vibes</h3>
+        </div>
+        <span className="hidden text-xs text-gray-500 sm:block">Pick a lane</span>
+      </div>
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+        {vibeButtons.map((vibe) => {
+          const Icon = vibe.icon;
+          return (
+            <button
               key={vibe.label}
               onClick={() => onQuickSearch(vibe.search)}
-              variant="panel"
-              size="md"
-              className="p-4 text-left"
+              className="group panel-card flex min-h-24 flex-col items-start justify-between p-4 text-left"
             >
-              {vibe.label}
-            </Button>
-          ))}
-        </div>
+              <Icon className="h-5 w-5 text-blue-300 transition-transform duration-300 group-hover:rotate-[-8deg] group-hover:scale-110" />
+              <span>
+                <span className="block text-sm font-semibold text-white">{vibe.label}</span>
+                <span className="text-xs text-slate-400">{vibe.detail}</span>
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
 

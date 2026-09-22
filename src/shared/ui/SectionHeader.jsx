@@ -1,13 +1,20 @@
 import React from 'react';
 
-const SectionHeader = ({ title, subtitle, action, className = '' }) => (
-  <div className={`mb-5 flex items-center justify-between gap-3 ${className}`.trim()}>
-    <div>
-      <h3 className="type-title">{title}</h3>
-      {subtitle ? <p className="type-caption text-gray-400 mt-1">{subtitle}</p> : null}
+const SectionHeader = ({ title, actionText, onAction, action }) => {
+  return (
+    <div className="flex items-center justify-between mb-4">
+      <h3 className="type-title text-[hsl(var(--foreground))]">{title}</h3>
+      {action || (actionText && (
+        <button 
+          onClick={onAction}
+          className="text-xs font-medium text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] transition-colors"
+        >
+          {actionText}
+        </button>
+      ))}
     </div>
-    {action}
-  </div>
-);
+  );
+};
 
+export { SectionHeader };
 export default SectionHeader;

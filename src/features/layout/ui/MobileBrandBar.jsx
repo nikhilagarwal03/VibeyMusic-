@@ -136,7 +136,7 @@ const MobileBrandBar = ({ isSearching }) => {
       <div className="mobile-brand-pill">
         <div className="mobile-brand-left">
           <img src={vibeyLogo} alt="Vibey Music" className="mobile-brand-logo" />
-          <h1 className="mobile-brand-title">Vibey Music</h1>
+          <h1 className="mobile-brand-title">VibeyMusic</h1>
         </div>
 
         <div className="mobile-brand-right">

@@ -226,7 +226,7 @@ const MainView = ({ forcedView = 'home' }) => {
 
   return (
     <div className="flex-1 h-full overflow-hidden bg-background md:flex">
-      <div className="flex-1 h-full overflow-y-auto p-5 pt-24 md:p-9 pb-24">
+      <div className="min-w-0 flex-1 h-full overflow-y-auto px-4 pt-20 pb-24 sm:px-5 sm:pt-24 md:p-9 md:pb-10">
         <MobileBrandBar isSearching={isSearching} />
 
         {forcedView === 'home' && (

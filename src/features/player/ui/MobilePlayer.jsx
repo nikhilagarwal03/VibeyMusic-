@@ -242,7 +242,7 @@ const MobilePlayer = () => {
                   </div>
                 </div>
 
-                <div className="w-full aspect-square panel-card rounded-2xl overflow-hidden">
+                <div className="w-full aspect-square max-h-[42vh] panel-card rounded-2xl overflow-hidden">
                   {currentTrack?.image ? (
                     <img
                       src={currentTrack.image}

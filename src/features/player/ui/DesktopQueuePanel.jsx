@@ -35,7 +35,7 @@ const DesktopQueuePanel = () => {
   }
 
   return (
-    <aside className="hidden lg:flex w-[320px] min-w-[320px] h-full border-l border-white/5 bg-black/20 backdrop-blur-xl p-4 flex-col">
+    <aside className="hidden xl:flex w-[300px] min-w-[300px] h-full border-l border-white/5 bg-black/20 backdrop-blur-xl p-4 flex-col">
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="inline-flex items-center gap-2">
           <ListMusic className="w-4 h-4 text-gray-300" />
